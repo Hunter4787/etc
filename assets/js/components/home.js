@@ -1,6 +1,8 @@
+//packages imports
 import React, {Component} from 'react';
-import Header from "./header";
 import {Link, Redirect, Route, Switch} from "react-router-dom";
+
+//components imports
 import Config from "./config";
 import Reservation from "./reservation";
 import Historique from "./historique";
@@ -9,6 +11,7 @@ class Home extends Component {
     render() {
         return (
             <div>
+                {/*-----navbar------*/}
                 <header>
                     <img src="https://previews.123rf.com/images/mushan/mushan1804/mushan180400124/99489983-h%C3%B4tel-or-%C3%A9tiquette-ic%C3%B4ne-illustration-vectorielle.jpg" />
                     <nav>
@@ -21,10 +24,16 @@ class Home extends Component {
                         </ul>
                     </nav>
                 </header>
-                <main className='home-welcome-message'>
-                    <h1>Welcome to your hotel home page</h1>
-                </main>
+                {/*-----/navBar----*/}
 
+                {/*----roots-----*/}
+                <Switch>
+                    <Redirect exact from="/" to="/config" />
+                    <Route path="/config" component={Config} />
+                    <Route path="/reservation" component={Reservation} />
+                    <Route path="/historique" component={Historique} />
+                </Switch>
+                {/*------/roots---*/}
             </div>
         );
     }

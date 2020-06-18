@@ -20,56 +20,61 @@ class Reservation
     /**
      * @ORM\Column(type="integer")
      */
-    private $roomNumber;
+    private $room;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $adulsCount;
+    private $adults;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $childsCount;
+    private $childs;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRoomNumber(): ?int
+    public function getRoom(): ?int
     {
         return $this->roomNumber;
     }
 
-    public function setRoomNumber(int $roomNumber): self
+    public function setRoom(int $room): self
     {
-        $this->roomNumber = $roomNumber;
+        $this->room = $room;
 
         return $this;
     }
 
-    public function getAdulsCount(): ?int
+    public function getAdults(): ?int
     {
-        return $this->adulsCount;
+        return $this->adults;
     }
 
-    public function setAdulsCount(int $adulsCount): self
+    public function setAdults(int $adults): self
     {
-        $this->adulsCount = $adulsCount;
+        $this->adults = $adults;
 
         return $this;
     }
 
-    public function getChildsCount(): ?int
+    public function getChilds(): ?int
     {
-        return $this->childsCount;
+        return $this->childs;
     }
 
-    public function setChildsCount(?int $childsCount): self
+    public function setChilds(?int $childs): self
     {
-        $this->childsCount = $childsCount;
+        $this->childs = $childs;
 
         return $this;
+    }
+
+    public function toArray()
+    {
+        return ['id' => $this->id, 'room' => $this->room, 'adults' => $this->adults, 'childs' => $this->childs];
     }
 }

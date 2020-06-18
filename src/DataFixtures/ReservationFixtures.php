@@ -12,9 +12,9 @@ class ReservationFixtures extends Fixture
     {
         for($i = 1; $i <= 10; $i++){
             $reservation = new Reservation();
-            $reservation->setRoomNumber($i)
-                        ->setAdulsCount($i+1)
-                        ->setChildsCount($i);
+            $reservation->setRoom($i)
+                        ->setAdults($i+1)
+                        ->setChilds($i);
             $manager->persist($reservation);
         }
 

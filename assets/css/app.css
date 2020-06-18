@@ -16,7 +16,7 @@ main {
 }
 
 header {
-    background-color: white;
+    background-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
@@ -29,6 +29,7 @@ header {
 
 header * {
     display: inline;
+    color: white;
 }
 
 header li {

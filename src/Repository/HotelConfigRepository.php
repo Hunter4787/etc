@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\HotelConfig;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +15,35 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HotelConfigRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, HotelConfig::class);
+        $this->registry = $registry;
+        $this->entityManager = $entityManager;
+    }
+
+    public function addConfig($adultMinAge, $adultMaxAge, $childMinAge, $childMaxAge, $paxPerRoom, $roomsCount)
+    {
+        $config = new HotelConfig();
+
+        $config->setPaxPerRoom($paxPerRoom);
+        $config->getAdultMaxAge($adultMaxAge);
+        $config->getAdultMinAge($adultMinAge);
+        $config->setChildMinAge($childMinAge);
+        $config->setChildMaxAge($childMaxAge);
+        $config->setRoomsCount($roomsCount);
+
+        $this->entityManager->persist($config);
+        $this->entityManager->flush();
     }
 
     // /**

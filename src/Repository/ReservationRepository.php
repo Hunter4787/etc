@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +15,32 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReservationRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $manager)
     {
         parent::__construct($registry, Reservation::class);
+        $this->registry = $registry;
+        $this->manager = $manager;
+    }
+
+    public function addReservation($r, $a, $c)
+    {
+        $reservation = new Reservation();
+
+        $reservation->setRoom($r);
+        $reservation->setAdults($a);
+        $reservation->setChilds($c);
+
+        $this->manager->persist($reservation);
+        $this->manager->flush();
     }
 
     // /**

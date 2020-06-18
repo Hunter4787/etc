@@ -123,4 +123,16 @@ class HotelConfig
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return ['id' => $this->id,
+            'paxPerRoom' => $this->paxPerRoom,
+            'RoomsCount' => $this->RoomsCount,
+            'childMinAge' => $this->childMinAge,
+            'childMaxAge' => $this->childMaxAge,
+            'adultMinAge' => $this->adultMinAge,
+            'adultMaxAge' => $this->childMaxAge,
+            ];
+    }
 }
